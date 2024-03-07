@@ -28,12 +28,21 @@ body {
     width: 500px;
 }
 
-.screen {
+.screenWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: right;
     flex: 0 0 1;
     height: 15%;
     width: 100%;
     background-color: green;
     border-radius: 10px;
+    padding: 5px;
+}
+
+.screen {
+    font-family: 'Times New Roman', Times, serif ;
+    font-size: 70px;;
 }
 
 .buttons {
@@ -51,11 +60,16 @@ body {
     display: flex;
     flex: auto;
     gap: 7px;
+    text-align: center;
 }
 
 .btn {
-    display: flex;
-    flex: auto; 
+    flex: 1; 
     background-color: rgb(37, 37, 37);
-    min-width: 5px;
+    font-family: Helvetica;
+    font-size: 30px;
+}
+
+#r5 .btn.b1 {
+    flex: 2.1 1 auto;
 }
