@@ -17,17 +17,24 @@ const btnAC = document.querySelector('.r1b1');
 const btnPlusMinus = document.querySelector('.r1b2');
 const btnPercent = document.querySelector('.r1b3');
 const btnDivide = document.querySelector('.r1b4');
+const screen = document.querySelector('.screen');
 
-btn0.addEventListener("click", () => {displayValue += 0});
-btn1.addEventListener("click", () => {displayValue += 1});
-btn2.addEventListener("click", () => {displayValue += 2});
-btn3.addEventListener("click", () => {displayValue += 3});
-btn4.addEventListener("click", () => {displayValue += 4});
-btn5.addEventListener("click", () => {displayValue += 5});
-btn6.addEventListener("click", () => {displayValue += 6});
-btn7.addEventListener("click", () => {displayValue += 7});
-btn8.addEventListener("click", () => {displayValue += 8});
-btn9.addEventListener("click", () => {displayValue += 9});
+let firstNum = 0;
+let operator;
+let secondNum = 0;
+let displayValue = '0';
+
+btn0.addEventListener("click", () => {buttonPressed('0')}); 
+btn1.addEventListener("click", () => {buttonPressed('1')});
+btn2.addEventListener("click", () => {buttonPressed('2')});
+btn3.addEventListener("click", () => {buttonPressed('3')});
+btn4.addEventListener("click", () => {buttonPressed('4')});
+btn5.addEventListener("click", () => {buttonPressed('5')});
+btn6.addEventListener("click", () => {buttonPressed('6')});
+btn7.addEventListener("click", () => {buttonPressed('7')});
+btn8.addEventListener("click", () => {buttonPressed('8')});
+btn9.addEventListener("click", () => {buttonPressed('9')});
+
 
 
 function add (num1, num2) {
@@ -46,11 +53,6 @@ function divide (num1, num2) {
     return num1 / num2;
 };
 
-let firstNum = 0;
-let operator;
-let secondNum = 0;
-let displayValue = 0;
-
 function operate (num1, curOperator, num2) {
     switch (curOperator) {
         case '+':
@@ -67,3 +69,10 @@ function operate (num1, curOperator, num2) {
             break;
     };
 };
+
+function buttonPressed (char) {
+    if (displayValue === '0') displayValue = '';
+    displayValue += char;
+    screen.textContent = `${displayValue}`; 
+
+}
