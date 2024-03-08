@@ -101,7 +101,7 @@ function operate (num1, curOperator, num2) {
 };
 
 function buttonPressed (char) {
-    if (displayValue === '0' && char != ".") {
+    if (displayValue === '0' && !(char === "." || char === '+' || char === '-' || char === '*' || char === '/' || char === '%' || char === "+/-")) {
         displayValue = '';
     } else if (displayValue === '0' && char === '.') {
         firstNum = '0';
@@ -129,6 +129,7 @@ function buttonPressed (char) {
             break;
     }
     if (current === 1) {
+        if ((firstNum.includes(".") && char === ".") || firstNum === '' && (char === '+' || char === '-' || char === '*' || char === '/' || char === '%' || char === "+/-")) return;
         if (char === '%' || char === "+/-") {
             operator = char;
             firstNum = operate(firstNum, operator, secondNum).toFixed(2);
@@ -140,6 +141,7 @@ function buttonPressed (char) {
             screen.textContent = displayValue;
         }
     } else {
+        if ((secondNum.includes(".") && char === ".") || secondNum === '' && (char === '.' || char === '+' || char === '-' || char === '*' || char === '/' || char === '%' || char === "+/-")) return;
         if (char === '+' || char === '-' || char === '*' || char === '/') {
             firstNum = firstNum.slice(0, firstNum.length -1);
             firstNum = operate(firstNum, operator, secondNum).toFixed(2) + char;
