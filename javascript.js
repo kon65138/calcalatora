@@ -48,7 +48,7 @@ btnDivide.addEventListener("click", () => {buttonPressed('/')});
 
 
 function add (num1, num2) {
-    return parseInt(num1) + parseInt(num2);
+    return Number(num1) + Number(num2);
 };
 
 function subtract (num1, num2) {
@@ -69,11 +69,13 @@ function percent (string) {
 
 function posNeg (string) {
     if (string.indexOf('-') === 0) {
+        operator = '';
         return string.slice(1);
     } else {
         return '-' + string;
     }
 }
+
 
 function operate (num1, curOperator, num2) {
     switch (curOperator) {
@@ -89,25 +91,35 @@ function operate (num1, curOperator, num2) {
         case '/':
             return divide(num1, num2);
             break;
+        case '%':
+            return percent(num1);
+            break;
+        case '+/-':
+            return posNeg(num1);
+            break;
     };
 };
 
 function buttonPressed (char) {
-    if (displayValue === '0') displayValue = '';
+    if (displayValue === '0' && char != ".") {
+        displayValue = '';
+    } else if (displayValue === '0' && char === '.') {
+        firstNum = '0';
+    }
     switch (true) {
-        case displayValue.includes("+"):
+        case firstNum.includes("+"):
             current = 2;
             operator = "+";
             break;
-        case displayValue.includes("-"):
+        case firstNum.includes("-", 1):
             current = 2;
             operator = '-';
             break;
-        case displayValue.includes("*"):
+        case firstNum.includes("*"):
             current = 2;
             operator = '*';
             break;
-        case displayValue.includes("/"):
+        case firstNum.includes("/"):
             current = 2;
             operator = '/';
             break;
@@ -117,21 +129,34 @@ function buttonPressed (char) {
             break;
     }
     if (current === 1) {
-        firstNum += char;
-        displayValue = firstNum;
-        screen.textContent = displayValue;
+        if (char === '%' || char === "+/-") {
+            operator = char;
+            firstNum = operate(firstNum, operator, secondNum).toFixed(2);
+            displayValue = firstNum;
+            screen.textContent = displayValue;
+        } else {
+            firstNum += char;
+            displayValue = firstNum;
+            screen.textContent = displayValue;
+        }
     } else {
         if (char === '+' || char === '-' || char === '*' || char === '/') {
             firstNum = firstNum.slice(0, firstNum.length -1);
-            firstNum = operate(firstNum, operator, secondNum).toString() + char;
+            firstNum = operate(firstNum, operator, secondNum).toFixed(2) + char;
             displayValue = firstNum;
             screen.textContent = displayValue;
             secondNum = '';
+        } else if (char === '%' || char === "+/-") {
+            operator = char;
+            secondNum = operate(secondNum, operator).toFixed(2);
+            displayValue = firstNum + secondNum;
+            screen.textContent = displayValue;
         } else {
             secondNum += char;
             displayValue = firstNum + secondNum;
             screen.textContent = displayValue;
         }
+        
     }
     
 
