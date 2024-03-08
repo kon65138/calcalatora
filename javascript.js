@@ -110,7 +110,7 @@ function buttonPressed (char) {
         screen.textContent = displayValue;
         return;
     }
-    if (displayValue === '0' && !(char === "." || char === '+' || char === '-' || char === '*' || char === '/' || char === '%' || char === "+/-")) {
+    if (displayValue === '0' && !(char === "." || char === '+' || char === '-' || char === '*' || char === '/' || char === '%' || char === "+/-" || char === '=')) {
         displayValue = '';
     } else if (displayValue === '0' && char === '.') {
         firstNum = '0';
