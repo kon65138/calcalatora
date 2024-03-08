@@ -110,7 +110,7 @@ function buttonPressed (char) {
         screen.textContent = displayValue;
     } else {
         if (char === '+' || char === '-' || char === '*' || char === '/') {
-            firstNum.slice(0, firstNum.length -1)
+            firstNum = firstNum.slice(0, firstNum.length -1);
             firstNum = operate(firstNum, operator, secondNum);
             displayValue = firstNum.toString();
             screen.textContent = displayValue;
