@@ -63,6 +63,18 @@ function divide (num1, num2) {
     return num1 / num2;
 };
 
+function percent (string) {
+    return string / 100;
+}
+
+function posNeg (string) {
+    if (string.indexOf('-') === 0) {
+        return string.slice(1);
+    } else {
+        return '-' + string;
+    }
+}
+
 function operate (num1, curOperator, num2) {
     switch (curOperator) {
         case '+':
