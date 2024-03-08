@@ -111,10 +111,9 @@ function buttonPressed (char) {
     } else {
         if (char === '+' || char === '-' || char === '*' || char === '/') {
             firstNum = firstNum.slice(0, firstNum.length -1);
-            firstNum = operate(firstNum, operator, secondNum);
-            displayValue = firstNum.toString();
+            firstNum = operate(firstNum, operator, secondNum).toString() + char;
+            displayValue = firstNum;
             screen.textContent = displayValue;
-            current = 1;
             secondNum = '';
         } else {
             secondNum += char;
