@@ -142,7 +142,7 @@ function buttonPressed (char) {
         if (char === "=") return;
         if (char === '%' || char === "+/-") {
             operator = char;
-            firstNum = operate(firstNum, operator, secondNum).toFixed(2);
+            firstNum = (Math.round(operate(firstNum, operator, secondNum) * 100) / 100).toString();
             displayValue = firstNum;
             screen.textContent = displayValue;
         } else {
@@ -154,18 +154,18 @@ function buttonPressed (char) {
         if ((secondNum.includes(".") && char === ".") || secondNum === '' && (char === '.' || char === '+' || char === '-' || char === '*' || char === '/' || char === '%' || char === "+/-" || char === '=')) return;
         if (char === '+' || char === '-' || char === '*' || char === '/') {
             firstNum = firstNum.slice(0, firstNum.length -1);
-            firstNum = operate(firstNum, operator, secondNum).toFixed(2) + char;
+            firstNum = (Math.round(operate(firstNum, operator, secondNum) * 100) / 100).toString() + char;
             displayValue = firstNum;
             screen.textContent = displayValue;
             secondNum = '';
         } else if (char === '%' || char === "+/-") {
             operator = char;
-            secondNum = operate(secondNum, operator).toFixed(2);
+            secondNum = (Math.round(operate(secondNum, operator) * 100) / 100).toString();
             displayValue = firstNum + secondNum;
             screen.textContent = displayValue;
         } else if (char === '=') {
             firstNum = firstNum.slice(0, firstNum.length -1);
-            firstNum = operate(firstNum, operator, secondNum).toFixed(2);
+            firstNum = (Math.round(operate(firstNum, operator, secondNum) * 100) / 100).toString();
             displayValue = firstNum;
             screen.textContent = displayValue;
             secondNum = '';
