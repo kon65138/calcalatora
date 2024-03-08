@@ -19,10 +19,11 @@ const btnPercent = document.querySelector('.r1b3');
 const btnDivide = document.querySelector('.r1b4');
 const screen = document.querySelector('.screen');
 
-let firstNum = 0;
-let operator;
-let secondNum = 0;
+let firstNum = '';
+let operator = "";
+let secondNum = '';
 let displayValue = '0';
+let current = 1;
 
 btn0.addEventListener("click", () => {buttonPressed('0')}); 
 btn1.addEventListener("click", () => {buttonPressed('1')});
@@ -34,11 +35,20 @@ btn6.addEventListener("click", () => {buttonPressed('6')});
 btn7.addEventListener("click", () => {buttonPressed('7')});
 btn8.addEventListener("click", () => {buttonPressed('8')});
 btn9.addEventListener("click", () => {buttonPressed('9')});
+btnDot.addEventListener("click", () => {buttonPressed('.')});
+btnEquals.addEventListener("click", () => {buttonPressed('=')});
+btnAdd.addEventListener("click", () => {buttonPressed('+')});
+btnSubtract.addEventListener("click", () => {buttonPressed('-')});
+btnTimes.addEventListener("click", () => {buttonPressed('*')});
+btnAC.addEventListener("click", () => {buttonPressed('AC')});
+btnPlusMinus.addEventListener("click", () => {buttonPressed('+/-')});
+btnPercent.addEventListener("click", () => {buttonPressed('%')});
+btnDivide.addEventListener("click", () => {buttonPressed('/')});
 
 
 
 function add (num1, num2) {
-    return num1 + num2;
+    return parseInt(num1) + parseInt(num2);
 };
 
 function subtract (num1, num2) {
@@ -72,7 +82,70 @@ function operate (num1, curOperator, num2) {
 
 function buttonPressed (char) {
     if (displayValue === '0') displayValue = '';
-    displayValue += char;
-    screen.textContent = `${displayValue}`; 
+    switch (true) {
+        case displayValue.includes("+"):
+            current = 2;
+            operator = "+";
+            break;
+        case displayValue.includes("-"):
+            current = 2;
+            operator = '-';
+            break;
+        case displayValue.includes("*"):
+            current = 2;
+            operator = '*';
+            break;
+        case displayValue.includes("/"):
+            current = 2;
+            operator = '/';
+            break;
+        default:
+            current = 1;
+            operator = '';
+            break;
+    }
+    if (current === 1) {
+        firstNum += char;
+        displayValue = firstNum;
+        screen.textContent = displayValue;
+    } else {
+        if (char === '+' || char === '-' || char === '*' || char === '/') {
+            firstNum.slice(0, firstNum.length -1)
+            firstNum = operate(firstNum, operator, secondNum);
+            displayValue = firstNum.toString();
+            screen.textContent = displayValue;
+            current = 1;
+            secondNum = '';
+        } else {
+            secondNum += char;
+            displayValue = firstNum + secondNum;
+            screen.textContent = displayValue;
+        }
+    }
+    
 
 }
+
+// case '+':
+//             let temp = operate(displayValue, '+', char);
+//             displayValue = `${temp}`;
+//             screen.textContent = `${displayValue}`;
+//             break;
+
+
+// if (displayValue === '0') displayValue = '';
+// screen.textContent = `${displayValue}`;
+// switch (displayValue.slice(-1)) {
+//     case '+':
+//         let temp2 = displayValue.match(/'+'/g);
+//         if (temp2.length < 2) break;
+//         temp2 = 0;
+//         let temp = operate(displayValue, '+', char);
+//         displayValue = `${temp}`;
+//         screen.textContent = `${displayValue}`;
+//         break;
+//     default:
+//         displayValue += char;
+//         screen.textContent = `${displayValue}`;
+//         break;
+// }
