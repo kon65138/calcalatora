@@ -101,6 +101,9 @@ function operate (num1, curOperator, num2) {
 };
 
 function buttonPressed (char) {
+    if (displayValue.length == 11 && !(char === '+' || char === '-' || char === '*' || char === '/' || char === '%' || char === "+/-" || char === '='|| char === 'AC')) {
+        return;
+    } else if (displayValue.length > 11 && char != 'AC') return;
     if (char === 'AC') {
         firstNum = '';
         operator = "";
