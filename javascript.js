@@ -40,7 +40,6 @@ function posNeg (string) {
     }
 }
 
-
 function operate (num1, curOperator, num2) {
     switch (curOperator) {
         case '+':
@@ -73,7 +72,7 @@ function buttonPressed (char) {
     if (displayValue.length == 11 && !(char === '+' || char === '-' || char === '*' || char === '/' || char === '%' || char === "+/-" || char === '='|| char === 'AC')) {
         return;
     } else if (displayValue.length > 11 && char != 'AC') return;
-    if (char === 'AC') {
+    if (char === 'AC' || screen.textContent === 'Nope!') {
         firstNum = '';
         operator = "";
         secondNum = '';
@@ -123,6 +122,7 @@ function buttonPressed (char) {
     } else {
         if ((secondNum.includes(".") && char === ".") || secondNum === '' && (char === '.' || char === '+' || char === '-' || char === '*' || char === '/' || char === '%' || char === "+/-" || char === '=')) return;
         if (char === '+' || char === '-' || char === '*' || char === '/') {
+            if (operator === '/' && secondNum == 0) return screen.textContent = "Nope!";
             firstNum = firstNum.slice(0, firstNum.length -1);
             firstNum = (Math.round(operate(firstNum, operator, secondNum) * 100) / 100).toString() + char;
             secondNum = '';
@@ -132,6 +132,7 @@ function buttonPressed (char) {
             secondNum = (Math.round(operate(secondNum, operator) * 100) / 100).toString();
             display();
         } else if (char === '=') {
+            if (operator === '/' && secondNum == 0) return screen.textContent = "Nope!";
             firstNum = firstNum.slice(0, firstNum.length -1);
             firstNum = (Math.round(operate(firstNum, operator, secondNum) * 100) / 100).toString();
             secondNum = '';
@@ -140,8 +141,5 @@ function buttonPressed (char) {
             secondNum += char;
             display();
         }
-        
     }
-    
-
 }
