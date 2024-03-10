@@ -11,10 +11,6 @@ let secondNum = '';
 let displayValue = '0';
 let current = 1;
 
-
-
-
-
 function add (num1, num2) {
     return Number(num1) + Number(num2);
 };
@@ -68,6 +64,11 @@ function operate (num1, curOperator, num2) {
     };
 };
 
+function display () {
+    displayValue = firstNum + secondNum;
+    screen.textContent = displayValue;
+}
+
 function buttonPressed (char) {
     if (displayValue.length == 11 && !(char === '+' || char === '-' || char === '*' || char === '/' || char === '%' || char === "+/-" || char === '='|| char === 'AC')) {
         return;
@@ -114,36 +115,30 @@ function buttonPressed (char) {
         if (char === '%' || char === "+/-") {
             operator = char;
             firstNum = (Math.round(operate(firstNum, operator, secondNum) * 100) / 100).toString();
-            displayValue = firstNum;
-            screen.textContent = displayValue;
+            display();
         } else {
             firstNum += char;
-            displayValue = firstNum;
-            screen.textContent = displayValue;
+            display();
         }
     } else {
         if ((secondNum.includes(".") && char === ".") || secondNum === '' && (char === '.' || char === '+' || char === '-' || char === '*' || char === '/' || char === '%' || char === "+/-" || char === '=')) return;
         if (char === '+' || char === '-' || char === '*' || char === '/') {
             firstNum = firstNum.slice(0, firstNum.length -1);
             firstNum = (Math.round(operate(firstNum, operator, secondNum) * 100) / 100).toString() + char;
-            displayValue = firstNum;
-            screen.textContent = displayValue;
             secondNum = '';
+            display();
         } else if (char === '%' || char === "+/-") {
             operator = char;
             secondNum = (Math.round(operate(secondNum, operator) * 100) / 100).toString();
-            displayValue = firstNum + secondNum;
-            screen.textContent = displayValue;
+            display();
         } else if (char === '=') {
             firstNum = firstNum.slice(0, firstNum.length -1);
             firstNum = (Math.round(operate(firstNum, operator, secondNum) * 100) / 100).toString();
-            displayValue = firstNum;
-            screen.textContent = displayValue;
             secondNum = '';
+            display();
         } else {
             secondNum += char;
-            displayValue = firstNum + secondNum;
-            screen.textContent = displayValue;
+            display();
         }
         
     }
