@@ -1,23 +1,9 @@
-const btn0 = document.querySelector('.r5b1');
-const btnDot = document.querySelector('.r5b2');
-const btnEquals = document.querySelector('.r5b3');
-const btn1 = document.querySelector('.r4b1');
-const btn2 = document.querySelector('.r4b2');
-const btn3 = document.querySelector('.r4b3');
-const btnAdd = document.querySelector('.r4b4');
-const btn4 = document.querySelector('.r3b1');
-const btn5 = document.querySelector('.r3b2');
-const btn6 = document.querySelector('.r3b3');
-const btnSubtract = document.querySelector('.r3b4');
-const btn7 = document.querySelector('.r2b1');
-const btn8 = document.querySelector('.r2b2');
-const btn9 = document.querySelector('.r2b3');
-const btnTimes = document.querySelector('.r2b4');
-const btnAC = document.querySelector('.r1b1');
-const btnPlusMinus = document.querySelector('.r1b2');
-const btnPercent = document.querySelector('.r1b3');
-const btnDivide = document.querySelector('.r1b4');
+const buttons = document.querySelectorAll('button');
 const screen = document.querySelector('.screen');
+
+for (let i = 0; i < buttons.length; i++) {
+    buttons[i].addEventListener("click", () => buttonPressed(`${buttons[i].textContent}`))
+}
 
 let firstNum = '';
 let operator = "";
@@ -25,25 +11,7 @@ let secondNum = '';
 let displayValue = '0';
 let current = 1;
 
-btn0.addEventListener("click", () => {buttonPressed('0')}); 
-btn1.addEventListener("click", () => {buttonPressed('1')});
-btn2.addEventListener("click", () => {buttonPressed('2')});
-btn3.addEventListener("click", () => {buttonPressed('3')});
-btn4.addEventListener("click", () => {buttonPressed('4')});
-btn5.addEventListener("click", () => {buttonPressed('5')});
-btn6.addEventListener("click", () => {buttonPressed('6')});
-btn7.addEventListener("click", () => {buttonPressed('7')});
-btn8.addEventListener("click", () => {buttonPressed('8')});
-btn9.addEventListener("click", () => {buttonPressed('9')});
-btnDot.addEventListener("click", () => {buttonPressed('.')});
-btnEquals.addEventListener("click", () => {buttonPressed('=')});
-btnAdd.addEventListener("click", () => {buttonPressed('+')});
-btnSubtract.addEventListener("click", () => {buttonPressed('-')});
-btnTimes.addEventListener("click", () => {buttonPressed('*')});
-btnAC.addEventListener("click", () => {buttonPressed('AC')});
-btnPlusMinus.addEventListener("click", () => {buttonPressed('+/-')});
-btnPercent.addEventListener("click", () => {buttonPressed('%')});
-btnDivide.addEventListener("click", () => {buttonPressed('/')});
+
 
 
 
@@ -182,27 +150,3 @@ function buttonPressed (char) {
     
 
 }
-
-// case '+':
-//             let temp = operate(displayValue, '+', char);
-//             displayValue = `${temp}`;
-//             screen.textContent = `${displayValue}`;
-//             break;
-
-
-// if (displayValue === '0') displayValue = '';
-// screen.textContent = `${displayValue}`;
-// switch (displayValue.slice(-1)) {
-//     case '+':
-//         let temp2 = displayValue.match(/'+'/g);
-//         if (temp2.length < 2) break;
-//         temp2 = 0;
-//         let temp = operate(displayValue, '+', char);
-//         displayValue = `${temp}`;
-//         screen.textContent = `${displayValue}`;
-//         break;
-//     default:
-//         displayValue += char;
-//         screen.textContent = `${displayValue}`;
-//         break;
-// }
